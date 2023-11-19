@@ -49,7 +49,7 @@ double eval_expr(const string& expr) {
 
     for (size_t i = 0; i < expr.length(); ++i) {
         if (isspace(expr[i])) {
-            continue; // Пропускаем пробелы
+            continue;
         } else if (isdigit(expr[i]) || (expr[i] == '-' && (i == 0 || expr[i - 1] == '('))) {
             size_t j = i;
             while (j < expr.length() && (isdigit(expr[j]) || expr[j] == '.' || (expr[j] == '-' && j == i))) {
@@ -69,7 +69,7 @@ double eval_expr(const string& expr) {
                 operators.pop();
                 values.push(apply_operator(a, b, op));
             }
-            operators.pop(); // Удаляем '(' из стека операторов
+            operators.pop(); 
         } else if (is_operator(expr[i])) {
             while (!operators.empty() && get_precedence(operators.top()) >= get_precedence(expr[i])) {
                 double b = values.top();
